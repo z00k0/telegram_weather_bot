@@ -7,7 +7,11 @@ from aiogram.utils.markdown import hbold
 import os
 import sys
 import logging
+from socket import timeout
+from dotenv import load_dotenv
 
+
+load_dotenv()
 API_TOKEN = os.getenv('WEATHER_BOT_TOKEN')
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
 
@@ -75,7 +79,11 @@ async def start(message: types.Message):
 @dp.message_handler()
 async def get_city(message: types.Message):
     city = message.text
-    cities_json = get_cities_json(city)
+    logging.info(f'{city=}')
+    try:
+        cities_json = get_cities_json(city)
+    except timeout as t:
+        logging.info(f'Timeout error: {t}')
     if cities_json:
         buttons = []
         keyboard = types.InlineKeyboardMarkup(inline_keyboard=True, row_width=1)
