@@ -1,4 +1,5 @@
-# telegram_weather_bot
+# telegram weather bot
+
 Телеграм бот для получения погоды используя API https://api.openweathermap.org/
 
 Для запуска бота необходим токен, получаемый через @BotFather в телеграме.
